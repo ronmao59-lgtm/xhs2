@@ -1,5 +1,5 @@
-import { getMissingProductionEnvVars } from "@/lib/deployment";
-import { isDashboardAuthed } from "@/lib/auth";
+import { isAdminAccessConfigured, isDashboardAuthed } from "@/lib/auth";
+import { LoginForm } from "@/components/login-form";
 import { redirect } from "next/navigation";
 
 export default function LoginPage({
@@ -11,8 +11,8 @@ export default function LoginPage({
     redirect("/");
   }
 
-  const missingEnvVars = getMissingProductionEnvVars();
-  const hasSetupProblem = missingEnvVars.length > 0 || searchParams?.setup;
+  const hasSetupProblem =
+    process.env.NODE_ENV === "production" && !isAdminAccessConfigured();
 
   return (
     <main className="login-shell">
@@ -37,39 +37,10 @@ export default function LoginPage({
             </div>
           </div>
 
-          <form action="/api/auth/login" method="post" className="login-form">
-            {hasSetupProblem ? (
-              <div className="setup-warning">
-                <strong>线上部署还缺少环境变量</strong>
-                <p>请先到 Vercel 项目的 Settings - Environment Variables 补齐：</p>
-                <ul>
-                  {missingEnvVars.length > 0 ? (
-                    missingEnvVars.map((name) => <li key={name}>{name}</li>)
-                  ) : (
-                    <li>ADMIN_ACCESS_KEY</li>
-                  )}
-                </ul>
-                <p>保存后需要重新 Redeploy，变量才会生效。</p>
-              </div>
-            ) : null}
-
-            <label htmlFor="accessKey">访问密钥</label>
-            <input
-              autoComplete="current-password"
-              autoFocus
-              disabled={Boolean(hasSetupProblem)}
-              id="accessKey"
-              name="accessKey"
-              placeholder="请输入访问密钥"
-              type="password"
-            />
-            {searchParams?.error ? (
-              <span className="login-error">密钥不正确，请重新输入。</span>
-            ) : null}
-            <button disabled={Boolean(hasSetupProblem)} type="submit">
-              进入后台
-            </button>
-          </form>
+          <LoginForm
+            hasError={Boolean(searchParams?.error)}
+            hasSetupProblem={Boolean(hasSetupProblem || searchParams?.setup)}
+          />
         </div>
       </section>
     </main>

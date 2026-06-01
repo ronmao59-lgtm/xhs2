@@ -626,14 +626,14 @@ h3 {
   display: grid;
   min-height: 100vh;
   place-items: center;
-  padding: 24px;
+  padding: 48px 24px;
   background:
     linear-gradient(180deg, #fff3f5 0, rgba(255, 243, 245, 0) 360px),
     var(--bg);
 }
 
 .login-panel {
-  width: min(760px, 100%);
+  width: min(1040px, 100%);
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--panel);
@@ -644,37 +644,39 @@ h3 {
 .login-brand {
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 26px 28px;
+  gap: 20px;
+  padding: 34px 38px;
   border-bottom: 1px solid var(--line);
   background: #ffffff;
 }
 
 .login-brand > span {
   display: grid;
-  width: 54px;
-  height: 54px;
+  width: 76px;
+  height: 76px;
   place-items: center;
-  border-radius: 8px;
+  border-radius: 12px;
   background: var(--accent);
   color: #ffffff;
-  font-size: 15px;
+  font-size: 22px;
   font-weight: 900;
 }
 
 .login-panel h1 {
-  font-size: 31px;
+  font-size: 44px;
+  line-height: 1.12;
 }
 
 .login-grid {
   display: grid;
-  grid-template-columns: 0.9fr 1fr;
-  gap: 22px;
-  padding: 28px;
+  grid-template-columns: 1fr 1.05fr;
+  gap: 36px;
+  padding: 42px 38px;
 }
 
 .login-intro {
-  padding: 18px;
+  min-height: 240px;
+  padding: 28px;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--bg-soft);
@@ -683,14 +685,15 @@ h3 {
 .login-intro p,
 .login-copy {
   color: var(--muted);
-  line-height: 1.75;
+  font-size: 20px;
+  line-height: 1.8;
 }
 
 .login-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 18px;
+  gap: 10px;
+  margin-top: 26px;
 }
 
 .login-tags span {
@@ -698,20 +701,20 @@ h3 {
   border-radius: 999px;
   background: var(--accent-soft);
   color: var(--accent);
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 900;
-  padding: 7px 10px;
+  padding: 9px 13px;
 }
 
 .login-form {
   display: grid;
-  gap: 10px;
+  gap: 14px;
   align-content: center;
 }
 
 .login-form label {
   color: var(--ink);
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 900;
 }
 
@@ -720,7 +723,16 @@ h3 {
   border: 1px solid var(--line);
   border-radius: 8px;
   outline: none;
-  padding: 13px 14px;
+  font-size: 18px;
+  padding: 18px 18px;
+}
+
+.login-form input[type="hidden"] {
+  display: none;
+}
+
+.masked-access-key {
+  -webkit-text-security: disc;
 }
 
 .login-form input:focus {
@@ -735,8 +747,9 @@ h3 {
 }
 
 .login-form button {
-  margin-top: 6px;
-  padding: 13px 14px;
+  margin-top: 8px;
+  padding: 18px 18px;
+  font-size: 18px;
 }
 
 .login-error {
